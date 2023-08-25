@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+
+<head>
+   <title>
+      HOME
+   </title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap.min.css') }}">
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"></script>
+</head>
+
+<body>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+         <a class="navbar-brand">Controle de Acesso</a>
+         <button class="btn btn-outline-success" onclick="window.location.reload()">Recarregar</button>
+         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+      </div>
+   </nav>
+   <div class="container-fluid mt-3">
+      <div class="card mx-5" style="background-color: rgba(0,0,0,.03);">
+         <div class="row justify-content-center px-3" style="column-gap: 15px;">
+            {% for x in imagens%}
+            <div class="card my-3 p-0" style="width: 18rem;">
+               <img src="{{ url_for('static',filename=x) }}" class="card-img-top" alt="...">
+               <div class="card-footer text-center">
+                  {{x.split('/')[2]}}
+               </div>
+            </div>
+            {% endfor %}
+         </div>
+      </div>
+      <div id="reloadTo">
+
+      </div>
+      
+      
+   </div>
+
+   <script>
+      // $('html,body').animate({scrollTop: document.body.scrollHeight},"fast");
+      // window.scrollTo(0, document.body.scrollHeight);
+      //setTimeout(() => {  window.location.reload() }, 10000);
+   </script>
+</body>
+
+</html>

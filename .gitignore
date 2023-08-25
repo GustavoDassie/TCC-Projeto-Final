@@ -159,3 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 .vscode
+Servidor/static/uploads/*.jpg
+Servidor/static/uploads/*.png
+Servidor/static/uploads2/*.jpg
+Servidor/static/uploads2/*.png
+Servidor/test.jpg
+Servidor/result.jpg
+Servidor/placa_preprocessada.jpg
