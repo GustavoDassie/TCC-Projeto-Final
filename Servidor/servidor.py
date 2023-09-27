@@ -4,6 +4,7 @@ import numpy as np
 import cv2
 import time
 from LerPlaca import LerPlaca
+from SimpleLPR import LerPlaca as SimpleLPRRead
 import os
 from imutils import paths
 from werkzeug.utils import secure_filename
@@ -12,7 +13,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 UPLOAD_FOLDER = (
-    r"C:\Users\gusta\Documentos\IFSP\TCC\TCC-novo\PROJETO_INICIAL\Servidor\static\uploads"
+    r"C:\Users\gusta\Documentos\IFSP\TCC\TCC-Projeto-Final\Servidor\static\uploads"
 )
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
@@ -29,19 +30,22 @@ def test():
     r = request
     if "imageFile" not in request.files:
         response = {
-            "message": "image received. size={}x{}".format(img.shape[1], img.shape[0])
+            "message": "Nenhuma imagem enviada"
         }
         # encode response using jsonpickle
         response_pickled = jsonpickle.encode(response)
 
         return Response(
-            response=response_pickled, status=200, mimetype="application/json"
+            response=response_pickled, status=400, mimetype="application/json"
         )
 
     file = request.files["imageFile"]
     print(file)
     print(r.files)
-
+   
+    response = {
+        "message": "Não foi possível processar a imagem"
+    }
     if file and allowed_file(file.filename):
         time_stamp = time.time()
 
@@ -53,12 +57,14 @@ def test():
         print("{}".format(filename))
         file.save(os.path.join(UPLOAD_FOLDER, filename))
         img = cv2.imread(os.path.join(UPLOAD_FOLDER, filename))
-        # ler.ler(img)
+        results = SimpleLPRRead(img)
+        print(results)
+        response = {
+            "message": "results: {}".format(results)
+        }
 
     # build a response dict to send back to client
-    response = {
-        "message": "image received. size={}x{}".format(img.shape[1], img.shape[0])
-    }
+   
     # encode response using jsonpickle
     response_pickled = jsonpickle.encode(response)
 

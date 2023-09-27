@@ -58,7 +58,7 @@ class LerPlaca:
         return cv2.matchTemplate(image, template, cv2.TM_CCOEFF_NORMED)
 
     def ler(self,image):
-        img = cv2.imread(r'C:\Users\gusta\Documentos\IFSP\TCC\TCC-novo\jupiter\merc.png')
+        img = cv2.imread(r'C:\Users\gusta\Documentos\IFSP\TCC\TCC-novo\jupiter\testeLegitimo.jpg')
         #teste
         # gray = self.get_grayscale(img)
         # gray = self.thresholding(gray)
