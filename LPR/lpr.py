@@ -27,8 +27,8 @@ taxaDeAspecto = larguraEntrada / float(alturaEntrada)
 fatorDeEscalaEntrada = 0.007843  # 1/127.5
 valorMédio = 127.5
 
-classNames = ('fundo',
-              'placa')
+classNames = ('background',
+              'plate')
 
 rede = dnn.readNetFromCaffe("./model/MobileNetSSD_test.prototxt", "./model/lpr.caffemodel")  # Lê o arquivo de modelo
 rede.setPreferableBackend(dnn.DNN_BACKEND_OPENCV)
