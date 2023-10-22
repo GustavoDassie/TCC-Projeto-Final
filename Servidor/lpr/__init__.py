@@ -22,7 +22,7 @@ REDE = dnn.readNetFromCaffe(
 )
 REDE.setPreferableBackend(dnn.DNN_BACKEND_OPENCV)
 
-# Ativar aceleração GPU OPENCL, padrão FP32
+# Ativar aceleracao GPU OPENCL, padrao FP32
 REDE.setPreferableTarget(dnn.DNN_TARGET_OPENCL)
 
 
@@ -32,7 +32,7 @@ class LRP:
     def __init__(self, verbose=False):
         self.__verbose = verbose
 
-    def detectar(self, frame: MatLike):
+    def detect(self, frame: MatLike):
         """
         Localiza placas e reconhece os caracteres da placa a partir da imagem de entrada\n
         Retornando a imagem marcada e os resultados de reconhecimento da placa
@@ -41,7 +41,7 @@ class LRP:
         # Redimensiona a imagem original para a largura e altura especificadas
         frame_redimensionado = cv2.resize(frame, (LARGURA_ENTRADA, ALTURA_ENTRADA))
 
-        # Calcula a proporção de redimensionamento da altura
+        # Calcula a proporcao de redimensionamento da altura
         fatorAltura = frame.shape[0] / ALTURA_ENTRADA
         fatorLargura = frame.shape[1] / LARGURA_ENTRADA
 
@@ -55,7 +55,7 @@ class LRP:
         REDE.setInput(blob)
 
         # Localiza a placa
-        detecções = REDE.forward()
+        deteccoes = REDE.forward()
 
         # Largura da imagem redimensionada
         colunas = frame_redimensionado.shape[1]
@@ -64,18 +64,18 @@ class LRP:
         resultados = []
 
         # Percorre as placas localizadas
-        for i in range(detecções.shape[2]):
-            confiança = detecções[0, 0, i, 2]
+        for i in range(deteccoes.shape[2]):
+            confianca = deteccoes[0, 0, i, 2]
 
-            # Confiança na localização da placa é maior que o valor especificado
-            if confiança > 0.2:
+            # Confianca na localizacao da placa é maior que o valor especificado
+            if confianca > 0.2:
                 # Coordenada x do ponto inferior esquerdo da caixa da placa na imagem detectada
-                xEsquerdaInferior = int(detecções[0, 0, i, 3] * colunas)
-                yEsquerdaInferior = int(detecções[0, 0, i, 4] * linhas)
+                xEsquerdaInferior = int(deteccoes[0, 0, i, 3] * colunas)
+                yEsquerdaInferior = int(deteccoes[0, 0, i, 4] * linhas)
 
                 # Coordenada x do ponto inferior direito da caixa da placa na imagem detectada
-                xDireitaSuperior = int(detecções[0, 0, i, 5] * colunas)
-                yDireitaSuperior = int(detecções[0, 0, i, 6] * linhas)
+                xDireitaSuperior = int(deteccoes[0, 0, i, 5] * colunas)
+                yDireitaSuperior = int(deteccoes[0, 0, i, 6] * linhas)
 
                 # Coordenada x do ponto superior esquerdo da caixa da placa na imagem original
                 xEsquerdaInferior_ = int(fatorLargura * xEsquerdaInferior)
@@ -95,7 +95,7 @@ class LRP:
                 xEsquerdaInferior_ -= int(w * 0.14)
                 xDireitaSuperior_ += int(w * 0.14)
 
-                # Recorta a área de localização da placa na imagem original
+                # Recorta a área de localizacao da placa na imagem original
                 imagem_recorte = frame[
                     yEsquerdaInferior_:yDireitaSuperior_,
                     xEsquerdaInferior_:xDireitaSuperior_,
@@ -116,7 +116,7 @@ class LRP:
                     plt.imshow(placa, cmap="gray")
                     plt.show()
 
-                # Precisão de localização, correção de inclinação
+                # Precisao de localizacao, correcao de inclinacao
                 imagem_rgb = fm.findContoursAndDrawBoundingBox(placa, self.__verbose)
 
                 if self.__verbose:
@@ -160,5 +160,5 @@ class LRP:
 
         nparr = np.fromstring(bites, np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        frame, charset = self.detectar(img)
+        frame, charset = self.detect(img)
         return bites, frame, charset
