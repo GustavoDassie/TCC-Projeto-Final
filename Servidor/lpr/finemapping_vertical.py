@@ -2,6 +2,7 @@ from keras.layers import Conv2D, Input, MaxPool2D, Activation, Flatten, Dense
 from keras.models import Model
 import numpy as np
 import cv2
+from cv2.typing import MatLike
 
 
 def getModel():
@@ -35,7 +36,7 @@ model = getModel()
 model.load_weights("./model/model12.h5")  # Carregamento dos pesos pré-treinados
 
 
-def finemappingVertical(image):
+def finemappingVertical(image: MatLike):
     """
     Função para realizar o mapeamento  na direção vertical
     """

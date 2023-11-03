@@ -1,11 +1,13 @@
 import cv2
+from cv2.typing import MatLike
 import numpy as np
+from numpy.typing import NDArray
 from matplotlib.pyplot import imshow
 from matplotlib import pyplot as plt
 from . import deskew
 
 
-def fitLine_ransac(pts, zero_add=0):
+def fitLine_ransac(pts: NDArray, zero_add=0):
     """
     Função para ajustar uma linha usando o método RANSAC
     """
@@ -19,7 +21,7 @@ def fitLine_ransac(pts, zero_add=0):
     return 0, 0
 
 
-def findContoursAndDrawBoundingBox(image_rgb, verbose=False):
+def findContoursAndDrawBoundingBox(image_rgb: MatLike, verbose=False):
     """
     Função para encontrar contornos e desenhar caixas delimitadoras
     """
@@ -33,7 +35,6 @@ def findContoursAndDrawBoundingBox(image_rgb, verbose=False):
 
     # Itere sobre diferentes valores de 'k' para aplicar limiarização adaptativa
     for k in np.linspace(-50, 0, 10):
-        
         # Aplique a limiarização adaptativa para binarizar a imagem
         binary_niblack = cv2.adaptiveThreshold(
             gray_image, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 17, k

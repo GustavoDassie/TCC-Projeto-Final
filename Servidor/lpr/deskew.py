@@ -1,17 +1,21 @@
 import numpy as np
+from numpy._typing import _Shape
 import cv2
+from cv2.typing import MatLike
 import math
-from scipy.ndimage import filters
+from scipy.ndimage import _filters as filters
 
 
-def angle(x, y):
+def angle(x: int, y: int):
     """
     Função para calcular o ângulo entre dois vetores
     """
     return int(math.atan2(float(y), float(x)) * 180.0 / 3.1415)
 
 
-def v_rot(img, angel, shape, max_angel):
+def v_rot(
+    img: MatLike, angel: int, shape: _Shape, max_angel: int
+) -> tuple[MatLike, MatLike]:
     """
     Função para realizar a rotação vertical
     """
@@ -36,7 +40,7 @@ def v_rot(img, angel, shape, max_angel):
     return dst, M
 
 
-def skew_detection(image_gray):
+def skew_detection(image_gray: MatLike):
     """
     Função para detecção de inclinação (skew)
     """
@@ -82,7 +86,7 @@ def skew_detection(image_gray):
     return skew_h, skew_v
 
 
-def fastDeskew(image):
+def fastDeskew(image: MatLike):
     """
     Função para realizar o deskew rápido na imagem
     """
