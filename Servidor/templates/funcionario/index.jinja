@@ -8,7 +8,8 @@
    <div class="card mx-2">
       <div class="card-header text-bg-orange d-flex jus flex-wrap justify-content-between align-items-center">
          <h5 class="card-title m-0">Funcionários</h5>
-         <a class="btn btn-outline-light" href="/funcionario/create"><i class="bi bi-plus"></i> Adicionar</a>
+         <a class="btn btn-outline-light" href="{{url_for('funcionario.create')}}"><i
+               class="bi bi-plus"></i> Adicionar</a>
       </div>
       <div class="card-body justify-content-center table-responsive">
          <table class="table table-striped align-middle" id="acessosTable">
@@ -18,15 +19,32 @@
                   <th scope="col">Nome</th>
                   <th scope="col">Email</th>
                   <th scope="col">CPF</th>
+                  <th scope="col" class="text-center">Ações</th>
                </tr>
             </thead>
             <tbody>
-               {% for x in funcionarios%}
+               {% for x in entities%}
                <tr>
                   <td>{{x.prontuario}}</td>
                   <td>{{x.nome}}</td>
                   <td>{{x.email}}</td>
                   <td>{{x.cpf}}</td>
+                  <td class="text-center">
+                     <a class="btn btn-outline-dark me-2" href="{{url_for('funcionario.edit', id=x.id)}}">
+                        <i class="bi bi-pencil"></i>
+                     </a>
+                     <a class="me-2 btn {{'btn-outline-success' if x.ativo else 'btn-outline-danger'}}"
+                        href="{{url_for('funcionario.toggle', id=x.id)}}">
+                        {% if x.ativo%}
+                        <i class="bi bi-unlock"></i>
+                        {% else %}
+                        <i class="bi bi-lock"></i>
+                        {% endif %}
+                     </a>
+                     <a class="btn btn-outline-danger" href="{{url_for('funcionario.delete', id=x.id)}}">
+                        <i class="bi bi-trash"></i>
+                     </a>
+                  </td>
                </tr>
                {% endfor %}
             </tbody>

@@ -23,7 +23,7 @@
                   <td>{{x.caracteres_detectados}}</td>
                   <td>
                      {% if x.veiculo != None %}
-                     {{x.veiculo.funcionario.nome}}
+                     {{x.veiculo.funcionario.nome}} - {{x.veiculo.funcionario.nome}}
                      {% endif %}
                   </td>
                </tr>
@@ -45,10 +45,10 @@
       },
       {# ajax: { url: '/api/acessos', dataSrc: '' },
       columns: [
-         { data: 'inserido_em' },
-         { data: 'caracteres_detectados' },
-         { data: 'veiculo.funcionario.nome' }
-      ], #}
+      { data: 'inserido_em' },
+      { data: 'caracteres_detectados' },
+      { data: 'veiculo.funcionario.nome' }
+   ], #}
       dom: '<"align-items-center d-flex justify-content-between py-2 w-100"if>rt<"align-items-center d-flex justify-content-between py-2 w-100"<"w-100"l><p><"w-100">>'
    })
 </script>

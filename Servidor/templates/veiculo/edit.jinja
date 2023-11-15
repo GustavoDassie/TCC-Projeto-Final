@@ -1,0 +1,64 @@
+{% extends "_layout.html" %}
+
+{% block title %}- Editar Veículo{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/virtual-select.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/tooltip.min.css') }}">
+
+<script src="{{ url_for('static',filename='js/virtual-select.min.js') }}"></script>
+<script src="{{ url_for('static',filename='js/tooltip.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid mt-3">
+   <form action="{{ url_for('veiculo.edit_post',id=entity.id)}}" method="post">
+      <div class="card mx-2">
+         <div class="card-header text-bg-orange d-flex jus flex-wrap justify-content-between align-items-center">
+            <h5 class="card-title m-0">Editar Veículo</h5>
+         </div>
+         <div class="card-body">
+            <div class="form-group">
+               <label class="control-label">Placa</label>
+               <input class="form-control" name="placa" value="{{entity.placa}}" type="text" required />
+            </div>
+            <div class="form-group">
+               <label class="control-label">Modelo</label>
+               <input class="form-control" name="modelo" value="{{entity.modelo}}" type="text" />
+            </div>
+            <div class="form-group">
+               <label class="control-label">Ano</label>
+               <input class="form-control" name="ano" value="{{entity.ano}}" type="number" min="1900" />
+            </div>
+            <div class="form-group">
+               <label class="control-label" for="funcionarios">Funcionário</label>
+               <select class="form-select" id="funcionarios" name="funcionario_id" value="{{entity.funcionario_id}}"
+                  required>
+                  <option>Selecione um funcionário</option>
+                  {% for x in all_funcionarios %}
+                  <option value="{{x.id}}" {{'selected' if entity.funcionario_id==x.id }}>
+                     {{x.prontuario}} - {{x.nome}}</option>
+                  {% endfor %}
+               </select>
+            </div>
+         </div>
+         <div class="card-footer d-flex jus flex-wrap justify-content-between align-items-center">
+            <a class="btn btn-light" href="{{url_for('veiculo.home')}}">Voltar</a>
+            <button class="btn btn-primary" type="submit">Salvar</button>
+         </div>
+      </div>
+   </form>
+</div>
+
+{% endblock %}
+
+{# {% block scripts %}
+<script>
+   $(document).ready(function () {
+      VirtualSelect.init({
+         ele: '#funcionarios',
+      });
+   })
+</script>
+{% endblock %} #}

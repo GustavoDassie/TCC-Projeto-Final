@@ -1,6 +1,6 @@
 {% extends "_layout.html" %}
 
-{% block title %}- Cadastrar Funcionário{% endblock %}
+{% block title %}- Editar Funcionário{% endblock %}
 
 {% block head %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/0.9.0/jquery.mask.min.js"
@@ -11,27 +11,27 @@
 {% block content %}
 
 <div class="container-fluid mt-3">
-   <form action="{{ url_for('funcionario.create_post')}}" method="post">
+   <form action="{{ url_for('funcionario.edit_post',id=entity.id)}}" method="post">
       <div class="card mx-2">
          <div class="card-header text-bg-orange d-flex jus flex-wrap justify-content-between align-items-center">
-            <h5 class="card-title m-0">Cadastrar Funcionário</h5>
+            <h5 class="card-title m-0">Editar Funcionário</h5>
          </div>
          <div class="card-body">
             <div class="form-group">
                <label class="control-label">Nome</label>
-               <input class="form-control" name="nome" type="text" required />
+               <input class="form-control" name="nome" value="{{entity.nome}}" type="text" required />
             </div>
             <div class="form-group">
                <label class="control-label">Email</label>
-               <input class="form-control" name="email" type="email" />
+               <input class="form-control" name="email" value="{{entity.email}}" type="email" />
             </div>
             <div class="form-group">
                <label class="control-label">CPF</label>
-               <input class="form-control" name="cpf" id="cpf" type="text" />
+               <input class="form-control" disabled name="cpf" id="cpf" value="{{entity.cpf}}" type="text" />
             </div>
             <div class="form-group">
                <label class="control-label">Prontuário</label>
-               <input class="form-control" name="prontuario" type="text" required />
+               <input class="form-control" disabled name="prontuario" value="{{entity.prontuario}}" type="text" required />
             </div>
          </div>
          <div class="card-footer d-flex jus flex-wrap justify-content-between align-items-center">

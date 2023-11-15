@@ -1,12 +1,9 @@
 from database import Base
-
 from sqlalchemy import *
 from sqlalchemy.sql import func
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 from sqlalchemy.orm import relationship
-from sqlalchemy.orm import session
 from typing import Optional
 from typing import List
 
@@ -29,7 +26,9 @@ class Acesso(Base):
             "caracteres_detectados": self.caracteres_detectados,
         }
         if depth > 0:
-            data["veiculo"] = self.veiculo.to_json(depth=depth - 1) if self.veiculo else None
+            data["veiculo"] = (
+                self.veiculo.to_json(depth=depth - 1) if self.veiculo else None
+            )
         return data
 
 
@@ -62,9 +61,17 @@ class Veiculo(Base):
             "ativo": self.ativo,
         }
         if depth > 0:
-            data["usuario"] = self.usuario.to_json(depth=depth - 1) if self.usuario else None
-            data["funcionario"] = self.funcionario.to_json(depth=depth - 1) if self.funcionario else None
-            data["acessos"] = [acesso.to_json(depth=depth - 1) for acesso in self.acessos] if self.acessos else None
+            data["usuario"] = (
+                self.usuario.to_json(depth=depth - 1) if self.usuario else None
+            )
+            data["funcionario"] = (
+                self.funcionario.to_json(depth=depth - 1) if self.funcionario else None
+            )
+            data["acessos"] = (
+                [acesso.to_json(depth=depth - 1) for acesso in self.acessos]
+                if self.acessos
+                else None
+            )
         return data
 
 
@@ -90,8 +97,19 @@ class Usuario(Base):
             "ativo": self.ativo,
         }
         if depth > 0:
-            data["funcionarios"] = [funcionario.to_json(depth=depth - 1) for funcionario in self.funcionarios] if self.funcionarios else None
-            data["veiculos"] = [veiculo.to_json(depth=depth - 1) for veiculo in self.veiculos] if self.veiculos else None
+            data["funcionarios"] = (
+                [
+                    funcionario.to_json(depth=depth - 1)
+                    for funcionario in self.funcionarios
+                ]
+                if self.funcionarios
+                else None
+            )
+            data["veiculos"] = (
+                [veiculo.to_json(depth=depth - 1) for veiculo in self.veiculos]
+                if self.veiculos
+                else None
+            )
         return data
 
 
@@ -122,6 +140,12 @@ class Funcionario(Base):
             "ativo": self.ativo,
         }
         if depth > 0:
-            data["usuario"] = self.usuario.to_json(depth=depth - 1) if self.usuario else None
-            data["veiculos"] = [veiculo.to_json(depth=depth - 1) for veiculo in self.veiculos] if self.veiculos else None
+            data["usuario"] = (
+                self.usuario.to_json(depth=depth - 1) if self.usuario else None
+            )
+            data["veiculos"] = (
+                [veiculo.to_json(depth=depth - 1) for veiculo in self.veiculos]
+                if self.veiculos
+                else None
+            )
         return data
