@@ -1,7 +1,6 @@
 from database.models import Funcionario
-from database.models import Veiculo
 from sqlalchemy.orm import Session
-from sqlalchemy import select, update
+from sqlalchemy import select
 from services import engine
 from datetime import datetime
 

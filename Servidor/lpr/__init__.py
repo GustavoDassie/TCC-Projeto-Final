@@ -8,7 +8,6 @@ import numpy as np
 from werkzeug.datastructures import FileStorage
 import json
 import re
-from typing import Type
 
 from . import finemapping as fm
 from . import finemapping_vertical as fv

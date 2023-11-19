@@ -1,12 +1,4 @@
-from flask import (
-    Blueprint,
-    Flask,
-    request,
-    Response,
-    render_template,
-    redirect,
-    url_for,
-)
+from flask import Blueprint, request, render_template, redirect, url_for
 from services import veiculoService as Service
 from services import funcionarioService as FuncionarioService
 

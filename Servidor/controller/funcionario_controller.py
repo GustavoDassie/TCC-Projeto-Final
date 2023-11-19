@@ -1,12 +1,4 @@
-from flask import (
-    Blueprint,
-    Flask,
-    request,
-    Response,
-    render_template,
-    redirect,
-    url_for,
-)
+from flask import Blueprint, request, render_template, redirect, url_for
 from services import funcionarioService as Service
 
 controller_bp = Blueprint("funcionario", __name__)
@@ -27,9 +19,7 @@ def create():
 def create_post():
     data = request.form
 
-    Service.Save(
-        data["nome"], data["email"], data["cpf"], data["prontuario"], 1
-    )
+    Service.Save(data["nome"], data["email"], data["cpf"], data["prontuario"], 1)
     return redirect(url_for("funcionario.home"))
 
 

@@ -1,10 +1,8 @@
-from database.models import Acesso
 from database.models import Veiculo
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 from services import engine
 from datetime import datetime
-from typing import Type
 from lpr import LPR
 
 
@@ -97,7 +95,6 @@ def verify_access(detects: list[str], LPR_MODEL: LPR) -> tuple[bool, str, int | 
                 return veiculo.ativo, charset, veiculo.id
             else:
                 placas = LPR_MODEL.all_correcoes_placa(charset)
-                print(placas)
                 veiculo = GetOneInPlacas(placas)
                 if veiculo is not None:
                     return veiculo.ativo, charset, veiculo.id
