@@ -15,11 +15,11 @@
 #include "soc/rtc_cntl_reg.h"
 #include "esp_camera.h"
 
-const char* ssid = "Gustavo";
+const char* ssid = "";
 
-const char* password = "01012703";
+const char* password = "";
 
-String serverName = "192.168.79.37";  // REPLACE WITH YOUR Raspberry Pi IP ADDRESS
+String serverName = "";  // REPLACE WITH YOUR Raspberry Pi IP ADDRESS
 //String serverName = "example.com";   // OR REPLACE WITH YOUR DOMAIN NAME
 
 String serverPath = "/";  // The default serverPath should be upload.php
