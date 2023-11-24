@@ -1,3 +1,10 @@
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
 
-engine = create_engine('mysql+mysqlconnector://root:root@localhost/tcc')
+# Load .env file
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+engine = create_engine(DATABASE_URL)

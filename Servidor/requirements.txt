@@ -6,6 +6,8 @@ matplotlib==3.7.2
 numpy==1.23.5
 opencv_python==4.8.0.76
 pytesseract==0.3.10
-scipy==1.11.3
+python-dotenv==1.0.0
+scipy==1.11.4
 SQLAlchemy==2.0.20
 Werkzeug==2.3.6
+libsass==0.22.0
