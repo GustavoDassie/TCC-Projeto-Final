@@ -6,7 +6,7 @@ Este projeto tem como objetivo desenvolver um sistema acessível e eficiente par
 
 O sistema baseia-se em uma arquitetura robusta que utiliza hardware ESP32-CAM para captura de imagens e acionamento da cancela. A parte de processamento de imagem é fundamentada no projeto [Fanghon/lpr](https://github.com/fanghon/lpr), garantindo eficiência na detecção de placas e reconhecimento de caracteres. Além disso, o servidor foi implementado utilizando Flask, com a integração das bibliotecas Alembic e SQLAlchemy para facilitar operações relacionadas ao banco de dados.
 
-## Instruções de Uso
+## Instruções de Uso - Servidor
 
 1. **Requisitos:**
 
@@ -25,7 +25,7 @@ O sistema baseia-se em uma arquitetura robusta que utiliza hardware ESP32-CAM pa
      ```
 
 3. **Configurar variáveis de ambiente:**
-   * Crie um novo arquivo chamado `.env`.
+   * Crie um novo arquivo chamado `.env` no diretório raiz do projeto.
 
    * Crie a variável `DATABASE_URL` e a preencha com os dados de conexão com o Banco de dados.
      * Exemplo:
