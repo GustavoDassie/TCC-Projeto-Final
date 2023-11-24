@@ -11,6 +11,13 @@ import re
 
 from . import finemapping as fm
 from . import finemapping_vertical as fv
+from dotenv import load_dotenv
+import os
+
+# Load .env file
+load_dotenv()
+
+pytesseract.pytesseract.tesseract_cmd = os.getenv("TESSERACT_CMD")
 
 LARGURA_ENTRADA = 480
 ALTURA_ENTRADA = 640
@@ -147,9 +154,7 @@ class LPR:
                     plt.show()
 
                 # Reconhecimento dos caracteres da placa
-                pytesseract.pytesseract.tesseract_cmd = (
-                    "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
-                )
+
                 caracs = pytesseract.image_to_string(
                     resultado,
                     lang="eng",

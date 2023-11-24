@@ -6,33 +6,45 @@ Este projeto tem como objetivo desenvolver um sistema acessível e eficiente par
 
 O sistema baseia-se em uma arquitetura robusta que utiliza hardware ESP32-CAM para captura de imagens e acionamento da cancela. A parte de processamento de imagem é fundamentada no projeto [Fanghon/lpr](https://github.com/fanghon/lpr), garantindo eficiência na detecção de placas e reconhecimento de caracteres. Além disso, o servidor foi implementado utilizando Flask, com a integração das bibliotecas Alembic e SQLAlchemy para facilitar operações relacionadas ao banco de dados.
 
----
-
 ## Instruções de Uso
 
 1. **Requisitos:**
 
    * Python (versão 3.11)
+   * Tesseract (versão 5.2.0.20220712)
    * Bibliotecas necessárias (listadas no arquivo `requirements.txt`)
 
 2. **Instalação:**
 
-    ```powershell
-    pip install -r requirements.txt
-    ```
+   * Tesseract:
+     * Guia para download: [Tessdoc/Downloads](https://github.com/tesseract-ocr/tessdoc/blob/main/Downloads.md)
+   * Bibliotecas:
 
-3. **Banco de Dados:**
+     ```powershell
+     pip install -r requirements.txt
+     ```
 
-   * Configurar a conexão com o banco de dados:
-     * Crie um novo arquivo chamado `.env`.
-     * Altere a variável de ambiente `DATABASE_URL` com os dados reais.
-       * Exemplo:
+3. **Configurar variáveis de ambiente:**
+   * Crie um novo arquivo chamado `.env`.
+
+   * Crie a variável `DATABASE_URL` e a preencha com os dados de conexão com o Banco de dados.
+     * Exemplo:
 
           ```dotenv
-          DATABASE_URL=mysql+mysqlconnector://user:password@host/database
+          DATABASE_URL=mysql+mysqlconnector://user:password@host/schema
           ```
 
-     * Aplique as migrações no banco de dados com o Alembic:
+   * Crie a variável `TESSERACT_CMD` e a preencha com o diretório de instalação do Tesseract.
+     * Exemplo:
+
+          ```dotenv
+          TESSERACT_CMD="C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
+          ```
+
+4. **Banco de Dados:**
+
+   * Configurar a conexão com o banco de dados:
+     * Com o arquivo `.env` já configurado, aplique as migrações no banco de dados com o Alembic:
 
           ```powershell
           alembic upgrade head
@@ -52,13 +64,13 @@ O sistema baseia-se em uma arquitetura robusta que utiliza hardware ESP32-CAM pa
           alembic downgrade -1
           ```
 
-4. **Execução do Servidor:**
+5. **Execução do Servidor:**
      * Execute o servidor Flask:
 
           ```powershell
           flask run
           ```
 
-5. **Acesso à Interface Web:**
+6. **Acesso à Interface Web:**
 
    * Abra um navegador e acesse <http://localhost:5000>
